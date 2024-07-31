@@ -1,0 +1,2 @@
+ALTER TABLE grand_prix
+ADD COLUMN circuit_name VARCHAR(255) NOT NULL;

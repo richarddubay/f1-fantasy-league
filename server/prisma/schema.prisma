@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model choices {
+  id         Int       @id @default(autoincrement())
+  choice     String    @db.VarChar(50)
+  created_at DateTime  @db.Timestamp(6)
+  updated_at DateTime? @db.Timestamp(6)
+  deleted_at DateTime? @db.Timestamp(6)
+}
+
+model driver {
+  id            Int       @id @default(autoincrement())
+  first_name    String    @db.VarChar(50)
+  last_name     String    @db.VarChar(50)
+  team_id       Int
+  driver_number Int
+  created_at    DateTime  @db.Timestamp(6)
+  updated_at    DateTime? @db.Timestamp(6)
+  deleted_at    DateTime? @db.Timestamp(6)
+}
+
+model flyway_schema_history {
+  installed_rank Int      @id(map: "flyway_schema_history_pk")
+  version        String?  @db.VarChar(50)
+  description    String   @db.VarChar(200)
+  type           String   @db.VarChar(20)
+  script         String   @db.VarChar(1000)
+  checksum       Int?
+  installed_by   String   @db.VarChar(100)
+  installed_on   DateTime @default(now()) @db.Timestamp(6)
+  execution_time Int
+  success        Boolean
+
+  @@index([success], map: "flyway_schema_history_s_idx")
+}
+
+model grand_prix {
+  id                      Int       @id @default(autoincrement())
+  grand_prix_name         String    @db.VarChar(255)
+  grand_prix_location     String    @db.VarChar(255)
+  fp1_start               DateTime? @db.Timestamptz(6)
+  fp2_start               DateTime? @db.Timestamptz(6)
+  fp3_start               DateTime? @db.Timestamptz(6)
+  qualifying_start        DateTime  @db.Timestamptz(6)
+  race_start              DateTime  @db.Timestamptz(6)
+  sprint_qualifying_start DateTime? @db.Timestamptz(6)
+  sprint_race_start       DateTime? @db.Timestamptz(6)
+  is_sprint_weekend       Boolean?
+  circuit_name            String    @db.VarChar(255)
+  created_at              DateTime  @db.Timestamp(6)
+  updated_at              DateTime? @db.Timestamp(6)
+  deleted_at              DateTime? @db.Timestamp(6)
+}
+
+model picks {
+  id            Int       @id @default(autoincrement())
+  player_id     Int
+  grand_prix_id Int
+  choice_id     Int
+  pick_id       Int
+  created_at    DateTime  @db.Timestamp(6)
+  updated_at    DateTime? @db.Timestamp(6)
+  deleted_at    DateTime? @db.Timestamp(6)
+}
+
+model player {
+  id         Int       @id @default(autoincrement())
+  first_name String    @db.VarChar(50)
+  last_name  String    @db.VarChar(50)
+  created_at DateTime  @db.Timestamp(6)
+  updated_at DateTime? @db.Timestamp(6)
+  deleted_at DateTime? @db.Timestamp(6)
+}
+
+model team {
+  id         Int       @id @default(autoincrement())
+  team_name  String    @db.VarChar(100)
+  created_at DateTime  @db.Timestamp(6)
+  updated_at DateTime? @db.Timestamp(6)
+  deleted_at DateTime? @db.Timestamp(6)
+}
