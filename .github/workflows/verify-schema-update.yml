@@ -1,0 +1,33 @@
+name: Verify Schema Update
+
+on:
+  workflow_call:
+  workflow_run:
+    workflows: ["Verify Database"]
+    types:
+      - completed
+
+defaults:
+  run:
+    working-directory: ./server
+
+env:
+  DATABASE_URL: postgresql://postgres:password@localhost:5433/f1_fantasy_league_db?schema=public
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: execute flyway in docker 🐳
+        run: docker compose -d
+      - name: Server Install
+        run: pnpm i
+      - name: Prisma Pull
+        run: npx prisma db pull
+      - name: Prisma Generate
+        run: npx prisma generate
+      - name: Spin Down Docker 🐳
+        run: docker compose down
