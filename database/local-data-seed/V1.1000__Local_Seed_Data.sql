@@ -47,7 +47,7 @@ VALUES
     14,
     'Oviedo, Spain',
     'Spain',
-    '07/29/1981'
+    '07/29/1981',
     CURRENT_TIMESTAMP
   ),
   (
