@@ -18,6 +18,7 @@ const deleteDriver = async (req: Request, res: Response) => {
         id: deletedDriver.id,
         first_name: deletedDriver.first_name,
         last_name: deletedDriver.last_name,
+        place_of_birth: deletedDriver.place_of_birth,
         created_at: deletedDriver.created_at,
       },
     });
@@ -39,12 +40,14 @@ const getDriverById = async (req: Request, res: Response) => {
 };
 
 const postDriver = async (req: Request, res: Response) => {
-  const { first_name, last_name, team_id, driver_number } = req.body;
+  const { first_name, last_name, team_id, driver_number, place_of_birth } =
+    req.body;
   const newDriver = {
     first_name,
     last_name,
     team_id,
     driver_number,
+    place_of_birth,
     created_at: new Date(),
   };
 
@@ -52,12 +55,13 @@ const postDriver = async (req: Request, res: Response) => {
     !newDriver.first_name ||
     !newDriver.last_name ||
     !newDriver.team_id ||
-    !newDriver.driver_number
+    !newDriver.driver_number ||
+    !newDriver.place_of_birth
   ) {
     return res
       .status(400)
       .send(
-        "A driver needs a first name, a last name, a team id, and a driver number."
+        "A driver needs a first name, a last name, a team id, a driver number, and a place of birth."
       );
   }
 
@@ -83,14 +87,21 @@ const postDriver = async (req: Request, res: Response) => {
 const putDriver = async (req: Request, res: Response) => {
   const { id } = req.params;
   const numericId = parseInt(id);
-  const { first_name, last_name, team_id, driver_number, created_at } =
-    req.body;
+  const {
+    first_name,
+    last_name,
+    team_id,
+    driver_number,
+    place_of_birth,
+    created_at,
+  } = req.body;
 
   const driverToUpdate = {
     first_name,
     last_name,
     team_id,
     driver_number,
+    place_of_birth,
     created_at,
   };
 

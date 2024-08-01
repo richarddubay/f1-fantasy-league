@@ -16,14 +16,15 @@ model choices {
 }
 
 model driver {
-  id            Int       @id @default(autoincrement())
-  first_name    String    @db.VarChar(50)
-  last_name     String    @db.VarChar(50)
-  team_id       Int
-  driver_number Int
-  created_at    DateTime  @db.Timestamp(6)
-  updated_at    DateTime? @db.Timestamp(6)
-  deleted_at    DateTime? @db.Timestamp(6)
+  id             Int       @id @default(autoincrement())
+  first_name     String    @db.VarChar(50)
+  last_name      String    @db.VarChar(50)
+  team_id        Int
+  driver_number  Int
+  created_at     DateTime  @db.Timestamp(6)
+  updated_at     DateTime? @db.Timestamp(6)
+  deleted_at     DateTime? @db.Timestamp(6)
+  place_of_birth String    @db.VarChar(255)
 }
 
 model flyway_schema_history {
