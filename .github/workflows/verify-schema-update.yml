@@ -25,6 +25,8 @@ jobs:
         run: docker compose up -d
       - name: pnpm-setup
         uses: pnpm/action-setup@v4
+        with:
+          version: latest
       - name: Server Install
         run: pnpm i
       - name: Prisma Pull
