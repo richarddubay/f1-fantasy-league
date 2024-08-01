@@ -25,6 +25,7 @@ model driver {
   updated_at     DateTime? @db.Timestamp(6)
   deleted_at     DateTime? @db.Timestamp(6)
   place_of_birth String    @db.VarChar(255)
+  country        String    @db.VarChar(50)
 }
 
 model flyway_schema_history {

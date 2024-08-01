@@ -19,6 +19,7 @@ const deleteDriver = async (req: Request, res: Response) => {
         first_name: deletedDriver.first_name,
         last_name: deletedDriver.last_name,
         place_of_birth: deletedDriver.place_of_birth,
+        country: deletedDriver.country,
         created_at: deletedDriver.created_at,
       },
     });
@@ -40,14 +41,21 @@ const getDriverById = async (req: Request, res: Response) => {
 };
 
 const postDriver = async (req: Request, res: Response) => {
-  const { first_name, last_name, team_id, driver_number, place_of_birth } =
-    req.body;
+  const {
+    first_name,
+    last_name,
+    team_id,
+    driver_number,
+    place_of_birth,
+    country,
+  } = req.body;
   const newDriver = {
     first_name,
     last_name,
     team_id,
     driver_number,
     place_of_birth,
+    country,
     created_at: new Date(),
   };
 
@@ -56,12 +64,13 @@ const postDriver = async (req: Request, res: Response) => {
     !newDriver.last_name ||
     !newDriver.team_id ||
     !newDriver.driver_number ||
-    !newDriver.place_of_birth
+    !newDriver.place_of_birth ||
+    !newDriver.country
   ) {
     return res
       .status(400)
       .send(
-        "A driver needs a first name, a last name, a team id, a driver number, and a place of birth."
+        "A driver needs a first name, a last name, a team id, a driver number, a place of birth, and a country."
       );
   }
 
@@ -93,6 +102,7 @@ const putDriver = async (req: Request, res: Response) => {
     team_id,
     driver_number,
     place_of_birth,
+    country,
     created_at,
   } = req.body;
 
@@ -102,6 +112,7 @@ const putDriver = async (req: Request, res: Response) => {
     team_id,
     driver_number,
     place_of_birth,
+    country,
     created_at,
   };
 

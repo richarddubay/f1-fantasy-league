@@ -6,6 +6,7 @@ type Driver = {
   team_id: number;
   driver_number: number;
   place_of_birth: string;
+  country: string;
   created_at: Date;
 };
 
@@ -45,6 +46,7 @@ export const postDriver = async (driver: Driver) => {
         team_id: driver.team_id,
         driver_number: driver.driver_number,
         place_of_birth: driver.place_of_birth,
+        country: driver.country,
         created_at: driver.created_at,
       },
     });
