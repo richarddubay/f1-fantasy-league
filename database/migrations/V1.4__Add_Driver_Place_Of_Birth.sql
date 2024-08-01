@@ -1,0 +1,2 @@
+ALTER TABLE driver
+ADD COLUMN place_of_birth VARCHAR(255) NOT NULL;
