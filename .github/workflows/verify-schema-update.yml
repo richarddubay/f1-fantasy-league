@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: execute flyway in docker 🐳
-        run: docker compose up -d
+        run: docker compose up
       - name: pnpm-setup
         uses: pnpm/action-setup@v4
         with:
