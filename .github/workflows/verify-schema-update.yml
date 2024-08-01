@@ -33,6 +33,8 @@ jobs:
         run: npx prisma db pull
       - name: Prisma Generate
         run: npx prisma generate
+      - name: Debug Git Status
+        run: git status
       - name: Check for modified snapshots / database schema
         id: snapshot-check
         run: echo ::set-output name=modified::$(if git status | grep "nothing to commit"; then echo "false"; else echo "true"; fi)
