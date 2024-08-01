@@ -28,28 +28,28 @@ WITH inserted_teams AS (
 )
 
 INSERT INTO
-  public.driver (first_name, last_name, team_id, driver_number, place_of_birth, created_at)
+  public.driver (first_name, last_name, team_id, driver_number, place_of_birth, country, created_at)
 VALUES
-  ('Alexander', 'Albon', (SELECT id FROM inserted_teams WHERE team_name = 'Williams'), 23, 'London, England', CURRENT_TIMESTAMP),
-  ('Fernando', 'Alonso', (SELECT id FROM inserted_teams WHERE team_name = 'Aston Martin'), 14, 'Oviedo, Spain', CURRENT_TIMESTAMP),
-  ('Valtteri', 'Bottas', (SELECT id FROM inserted_teams WHERE team_name = 'Kick Sauber'), 77, 'Nastola, Finland', CURRENT_TIMESTAMP),
-  ('Pierre', 'Gasly', (SELECT id FROM inserted_teams WHERE team_name = 'Alpine'), 10, 'Rouen, France', CURRENT_TIMESTAMP),
-  ('Lewis', 'Hamilton', (SELECT id FROM inserted_teams WHERE team_name = 'Mercedes'), 44, 'Stevenage, England', CURRENT_TIMESTAMP),
-  ('Nico', 'Hülkenberg', (SELECT id FROM inserted_teams WHERE team_name = 'Haas'), 27, 'Emmerich am Rhein, Germany', CURRENT_TIMESTAMP),
-  ('Charles', 'Leclerc', (SELECT id FROM inserted_teams WHERE team_name = 'Ferrari'), 16, 'Monte Carlo, Monaco', CURRENT_TIMESTAMP),
-  ('Kevin', 'Magnussen', (SELECT id FROM inserted_teams WHERE team_name = 'Haas'), 20, 'Roskilde, Denmark', CURRENT_TIMESTAMP),
-  ('Lando', 'Norris', (SELECT id FROM inserted_teams WHERE team_name = 'McLaren'), 4, 'Bristol, England', CURRENT_TIMESTAMP),
-  ('Esteban', 'Ocon', (SELECT id FROM inserted_teams WHERE team_name = 'Alpine'), 31, 'Évreux, Normandy', CURRENT_TIMESTAMP),
-  ('Sergio', 'Pérez', (SELECT id FROM inserted_teams WHERE team_name = 'Red Bull'), 11, 'Guadalajara, Mexico', CURRENT_TIMESTAMP),
-  ('Oscar', 'Piastri', (SELECT id FROM inserted_teams WHERE team_name = 'McLaren'), 81, 'Melbourne, Victoria', CURRENT_TIMESTAMP),
-  ('Daniel', 'Ricciardo', (SELECT id FROM inserted_teams WHERE team_name = 'Visa Cash App RB'), 3, 'Perth, Australia', CURRENT_TIMESTAMP),
-  ('George', 'Russell', (SELECT id FROM inserted_teams WHERE team_name = 'Mercedes'), 63, 'King''s Lynn, England', CURRENT_TIMESTAMP),
-  ('Carlos', 'Sainz', (SELECT id FROM inserted_teams WHERE team_name = 'Ferrari'), 55, 'Madrid, Spain', CURRENT_TIMESTAMP),
-  ('Logan', 'Sargeant', (SELECT id FROM inserted_teams WHERE team_name = 'Williams'), 2, 'Fort Lauderdale, Florida', CURRENT_TIMESTAMP),
-  ('Lance', 'Stroll', (SELECT id FROM inserted_teams WHERE team_name = 'Aston Martin'), 18, 'Montreal, Canada', CURRENT_TIMESTAMP),
-  ('Yuki', 'Tsunoda', (SELECT id FROM inserted_teams WHERE team_name = 'Visa Cash App RB'), 22, 'Sagamihara, Japan', CURRENT_TIMESTAMP),
-  ('Max', 'Verstappen', (SELECT id FROM inserted_teams WHERE team_name = 'Red Bull'), 1, 'Hasselt, Belgium', CURRENT_TIMESTAMP),
-  ('Guanyu', 'Zhou', (SELECT id FROM inserted_teams WHERE team_name = 'Kick Sauber'), 24, 'Shanghai, China', CURRENT_TIMESTAMP);
+  ('Alexander', 'Albon', (SELECT id FROM inserted_teams WHERE team_name = 'Williams'), 23, 'London, England', 'Thailand', CURRENT_TIMESTAMP),
+  ('Fernando', 'Alonso', (SELECT id FROM inserted_teams WHERE team_name = 'Aston Martin'), 14, 'Oviedo, Spain', 'Spain', CURRENT_TIMESTAMP),
+  ('Valtteri', 'Bottas', (SELECT id FROM inserted_teams WHERE team_name = 'Kick Sauber'), 77, 'Nastola, Finland', 'Finland', CURRENT_TIMESTAMP),
+  ('Pierre', 'Gasly', (SELECT id FROM inserted_teams WHERE team_name = 'Alpine'), 10, 'Rouen, France', 'France', CURRENT_TIMESTAMP),
+  ('Lewis', 'Hamilton', (SELECT id FROM inserted_teams WHERE team_name = 'Mercedes'), 44, 'Stevenage, England', 'United Kingdom', CURRENT_TIMESTAMP),
+  ('Nico', 'Hülkenberg', (SELECT id FROM inserted_teams WHERE team_name = 'Haas'), 27, 'Emmerich am Rhein, Germany', 'Germany', CURRENT_TIMESTAMP),
+  ('Charles', 'Leclerc', (SELECT id FROM inserted_teams WHERE team_name = 'Ferrari'), 16, 'Monte Carlo, Monaco', 'Monaco', CURRENT_TIMESTAMP),
+  ('Kevin', 'Magnussen', (SELECT id FROM inserted_teams WHERE team_name = 'Haas'), 20, 'Roskilde, Denmark', 'Denmark', CURRENT_TIMESTAMP),
+  ('Lando', 'Norris', (SELECT id FROM inserted_teams WHERE team_name = 'McLaren'), 4, 'Bristol, England', 'United Kingdom', CURRENT_TIMESTAMP),
+  ('Esteban', 'Ocon', (SELECT id FROM inserted_teams WHERE team_name = 'Alpine'), 31, 'Évreux, Normandy', 'France', CURRENT_TIMESTAMP),
+  ('Sergio', 'Pérez', (SELECT id FROM inserted_teams WHERE team_name = 'Red Bull'), 11, 'Guadalajara, Mexico', 'Mexico', CURRENT_TIMESTAMP),
+  ('Oscar', 'Piastri', (SELECT id FROM inserted_teams WHERE team_name = 'McLaren'), 81, 'Melbourne, Victoria', 'Australia', CURRENT_TIMESTAMP),
+  ('Daniel', 'Ricciardo', (SELECT id FROM inserted_teams WHERE team_name = 'Visa Cash App RB'), 3, 'Perth, Australia', 'Australia', CURRENT_TIMESTAMP),
+  ('George', 'Russell', (SELECT id FROM inserted_teams WHERE team_name = 'Mercedes'), 63, 'King''s Lynn, England', 'United Kingdom', CURRENT_TIMESTAMP),
+  ('Carlos', 'Sainz', (SELECT id FROM inserted_teams WHERE team_name = 'Ferrari'), 55, 'Madrid, Spain', 'Spain', CURRENT_TIMESTAMP),
+  ('Logan', 'Sargeant', (SELECT id FROM inserted_teams WHERE team_name = 'Williams'), 2, 'Fort Lauderdale, Florida', 'United States', CURRENT_TIMESTAMP),
+  ('Lance', 'Stroll', (SELECT id FROM inserted_teams WHERE team_name = 'Aston Martin'), 18, 'Montreal, Canada', 'Canada', CURRENT_TIMESTAMP),
+  ('Yuki', 'Tsunoda', (SELECT id FROM inserted_teams WHERE team_name = 'Visa Cash App RB'), 22, 'Sagamihara, Japan', 'Japan', CURRENT_TIMESTAMP),
+  ('Max', 'Verstappen', (SELECT id FROM inserted_teams WHERE team_name = 'Red Bull'), 1, 'Hasselt, Belgium', 'Netherlands', CURRENT_TIMESTAMP),
+  ('Guanyu', 'Zhou', (SELECT id FROM inserted_teams WHERE team_name = 'Kick Sauber'), 24, 'Shanghai, China', 'China', CURRENT_TIMESTAMP);
 
 INSERT INTO
   public.grand_prix (grand_prix_name, grand_prix_location, fp1_start, fp2_start, fp3_start, qualifying_start, race_start, sprint_qualifying_start, sprint_race_start, is_sprint_weekend, circuit_name, created_at)
