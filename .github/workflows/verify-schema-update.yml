@@ -30,9 +30,9 @@ jobs:
       - name: Server Install
         run: pnpm i
       - name: Prisma Pull
-        run: npx prisma db pull
+        run: pnpm run prisma:pull
       - name: Prisma Generate
-        run: npx prisma generate
+        run: pnpm run prisma:generate
       - name: Debug Git Status
         run: git status
       - name: Check for modified snapshots / database schema
