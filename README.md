@@ -54,11 +54,11 @@ The purpose of the F1 Fantasy League app (codename: _Drift Kings_) is to provide
 }}%%
 
 erDiagram
-  PERSON ||--o{ PICKS : makes
-  CONSTRUCTOR ||--|{ DRIVER : has
+  PLAYER ||--o{ PICKS : makes
+  TEAM ||--|{ DRIVER : has
   PICKS ||--|| GRAND-PRIX : includes
   PICKS ||--|| CHOICES : includes
-  PICKS ||--|| CONSTRUCTOR : includes
+  PICKS ||--|| TEAM : includes
   PICKS ||--|| DRIVER : includes
 ```
 
@@ -73,50 +73,53 @@ erDiagram
 }}%%
 
 erDiagram
-  PERSON {
+  PLAYER {
     int id
-    string firstName
-    string lastName
+    string first_name
+    string last_name
   }
   DRIVER {
-    int Id
-    string firstName
-    string lastName
-    int constructorId
+    int id
+    string first_name
+    string last_name
+    int team_id
+    int driver_number
+    string place_of_birth
+    string country
   }
-  CONSTRUCTOR {
+  TEAM {
     int id
     string name
   }
   GRAND-PRIX {
-    int Id
-    string Name
-    string Location
-    DateTime FP1Start
-    DateTime FP2Start
-    DateTime FP3Start
-    DateTime QualifyingStart
-    DateTime RaceStart
-    DateTime SprintQualifyingStart
-    DateTime SprintRaceStart
-    boolean IsSprintWeekend
+    int id
+    string grand_prix_name
+    string grand_prix_location
+    DateTime fp1_start
+    DateTime fp2_start
+    DateTime fp3_start
+    DateTime qualifying_start
+    DateTime race_start
+    DateTime sprint_qualifying_start
+    DateTime sprint_race_start
+    boolean is_sprint_weekend
   }
   CHOICES {
-    int Id
-    string Choice "This is 1st, 2nd, 3rd, 10th, DNF, Top Team, Sprint 10th, Sprint DNF, Sprint Top Team"
+    int id
+    string choice "This is 1st, 2nd, 3rd, 10th, DNF, Top Team, Sprint 10th, Sprint DNF, Sprint Top Team"
   }
   PICKS {
-    int Id
-    int PersonId
-    int GrandPrixId
-    int ChoiceId
-    int PickId "This will be either a driver id or a constructor id depending on the choice"
+    int id
+    int player_id
+    int grand_prix_id
+    int choice_id
+    int pick_id "This will be either a driver id or a team id depending on the choice"
   }
-  PERSON ||--o{ PICKS : makes
-  CONSTRUCTOR ||--|{ DRIVER : has
+  PLAYER ||--o{ PICKS : makes
+  TEAM ||--|{ DRIVER : has
   PICKS ||--|| GRAND-PRIX : includes
   PICKS ||--|| CHOICES : includes
-  PICKS ||--|| CONSTRUCTOR : includes
+  PICKS ||--|| TEAM : includes
   PICKS ||--|| DRIVER : includes
 ```
 
