@@ -24,7 +24,7 @@ jobs:
       - name: execute flyway in docker 🐳
         run: docker compose up -d
       - name: Server Install
-        run: pnpm i
+        run: npm i
       - name: Prisma Pull
         run: npx prisma db pull
       - name: Prisma Generate
