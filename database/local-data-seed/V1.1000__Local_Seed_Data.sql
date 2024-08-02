@@ -37,7 +37,7 @@ VALUES
     23,
     'London, England',
     'Thailand',
-    '23/03/1996',
+    '03/23/1996',
     CURRENT_TIMESTAMP
   ),
   (
