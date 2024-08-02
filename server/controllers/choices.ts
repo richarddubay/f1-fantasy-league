@@ -3,95 +3,111 @@ import { choicesModel } from "../models";
 import { prisma } from "../utils/prisma";
 
 const deleteChoiceById = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const numericId = parseInt(id);
-  const choice = await prisma.choices.findUnique({
-    where: {
-      id: numericId,
-    },
-  });
-  if (choice) {
-    const deletedChoice = await choicesModel.deleteChoice(numericId);
-    res.json({
-      message: "Deleted choice",
-      choice: {
-        id: deletedChoice.id,
-        choice: deletedChoice.choice,
-        created_at: deletedChoice.created_at,
+  try {
+    const { id } = req.params;
+    const numericId = parseInt(id);
+    const choice = await prisma.choices.findUnique({
+      where: {
+        id: numericId,
       },
     });
-  } else {
-    res.send("No choice with that id exists");
+    if (choice) {
+      const deletedChoice = await choicesModel.deleteChoice(numericId);
+      res.json({
+        message: "Deleted choice",
+        choice: {
+          id: deletedChoice.id,
+          choice: deletedChoice.choice,
+          created_at: deletedChoice.created_at,
+        },
+      });
+    } else {
+      res.send("No choice with that id exists");
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: error,
+    });
   }
 };
 
 const getChoices = async (req: Request, res: Response) => {
-  const choices = await choicesModel.getAllChoices();
-  res.json(choices);
+  try {
+    const choices = await choicesModel.getAllChoices();
+    res.json(choices);
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
 };
 
 const getChoiceById = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const numericId = parseInt(id);
-  const choice = await choicesModel.getChoiceById(numericId);
-  res.json(choice);
+  try {
+    const { id } = req.params;
+    const numericId = parseInt(id);
+    const choice = await choicesModel.getChoiceById(numericId);
+    res.json(choice);
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
 };
 
 const postChoice = async (req: Request, res: Response) => {
-  const { choice } = req.body;
-  const newChoice = {
-    choice,
-    created_at: new Date(),
-  };
+  try {
+    const { choice } = req.body;
+    const newChoice = {
+      choice,
+      created_at: new Date(),
+    };
 
-  if (!newChoice.choice) {
-    return res.status(400).send("Missing a choice name/title");
-  }
+    if (!newChoice.choice) {
+      return res.status(400).send("Missing a choice name/title");
+    }
 
-  const choiceResponse = await choicesModel.postChoice(newChoice);
+    const choiceResponse = await choicesModel.postChoice(newChoice);
 
-  if ("errorMessage" in choiceResponse) {
-    console.error(
-      `There was an error adding the new choice: ${choiceResponse.errorMessage}`
-    );
-    return res
-      .status(choiceResponse.statusCode)
-      .send(
-        `There was an error adding the new choice: ${choiceResponse.errorMessage}`
-      );
-  } else {
-    return res.status(choiceResponse.statusCode).json({
+    return res.status(201).json({
       message: "Choice created successfully",
-      choice: choiceResponse.choice,
+      choice: choiceResponse,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: `There was an error adding the new choice: ${error}`,
+      error: error,
     });
   }
 };
 
 const putChoice = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const numericId = parseInt(id);
-  const { choice, created_at } = req.body;
-  const choiceToUpdate = {
-    choice,
-    created_at,
-  };
-  const choiceResponse = await choicesModel.putChoice(
-    numericId,
-    choiceToUpdate
-  );
-  if ("errorMessage" in choiceResponse) {
-    console.error(
-      `There was an error updating the choice: ${choiceResponse.errorMessage}`
+  try {
+    const { id } = req.params;
+    const numericId = parseInt(id);
+    const { choice, created_at } = req.body;
+
+    const choiceToUpdate = {
+      choice,
+      created_at,
+    };
+
+    const choiceResponse = await choicesModel.putChoice(
+      numericId,
+      choiceToUpdate
     );
-    return res
-      .status(choiceResponse.statusCode)
-      .send(
-        `There was an error updating the choice: ${choiceResponse.errorMessage}`
-      );
-  } else {
-    return res.status(choiceResponse.statusCode).json({
+
+    return res.status(200).json({
       message: "Choice updated successfully",
-      choice: choiceResponse.choice,
+      choice: choiceResponse,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: `There was an error updating the choice: ${error}`,
+      error: error,
     });
   }
 };

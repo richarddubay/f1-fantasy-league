@@ -31,48 +31,24 @@ export const getChoiceById = async (choiceId: number) => {
 };
 
 export const postChoice = async (choice: ChoiceType) => {
-  try {
-    const newChoice = await prisma.choices.create({
-      data: {
-        choice: choice.choice,
-        created_at: choice.created_at,
-      },
-    });
-    return {
-      message: "Success",
-      statusCode: 201,
-      choice: newChoice,
-    };
-  } catch (error) {
-    return {
-      message: "Internal Server Error",
-      statusCode: 500,
-      errorMessage: error,
-    };
-  }
+  const newChoice = await prisma.choices.create({
+    data: {
+      choice: choice.choice,
+      created_at: choice.created_at,
+    },
+  });
+  return newChoice;
 };
 
 export const putChoice = async (choiceId: number, choice: ChoiceType) => {
-  try {
-    const updatedChoice = await prisma.choices.update({
-      where: {
-        id: choiceId,
-      },
-      data: {
-        ...choice,
-      },
-    });
-
-    return {
-      message: "Success",
-      statusCode: 200,
-      choice: updatedChoice,
-    };
-  } catch (error) {
-    return {
-      message: "Internal Server Error",
-      statusCode: 500,
-      errorMessage: error,
-    };
-  }
+  const updatedChoice = await prisma.choices.update({
+    where: {
+      id: choiceId,
+    },
+    data: {
+      ...choice,
+      created_at: choice.created_at ? new Date(choice.created_at) : undefined,
+    },
+  });
+  return updatedChoice;
 };
