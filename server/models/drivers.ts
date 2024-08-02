@@ -1,14 +1,7 @@
 import { prisma } from "../utils/prisma";
+import type { driver as Driver } from "@prisma/client";
 
-type Driver = {
-  first_name: string;
-  last_name: string;
-  team_id: number;
-  driver_number: number;
-  place_of_birth: string;
-  country: string;
-  created_at: Date;
-};
+type DriverType = Omit<Driver, "id" | "updated_at" | "deleted_at">;
 
 export const deleteDriver = async (driverId: number) => {
   const deletedDriver = await prisma.driver.delete({
@@ -37,7 +30,7 @@ export const getDriverById = async (driverId: number) => {
   return driver;
 };
 
-export const postDriver = async (driver: Driver) => {
+export const postDriver = async (driver: DriverType) => {
   try {
     const newDriver = await prisma.driver.create({
       data: {
@@ -64,7 +57,7 @@ export const postDriver = async (driver: Driver) => {
   }
 };
 
-export const putDriver = async (driverId: number, driver: Driver) => {
+export const putDriver = async (driverId: number, driver: DriverType) => {
   try {
     const updatedDriver = await prisma.driver.update({
       where: {

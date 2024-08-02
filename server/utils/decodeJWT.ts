@@ -9,8 +9,12 @@ type JwtPayload = {
 // function parseJwt(token: string, secretOrPublicKey: string): JwtPayload | null {
 function parseJwt(
   token: string,
-  secretOrPublicKey: string = "abc123"
+  secretOrPublicKey: string = process.env.JWT_SECRET_KEY as string
 ): JwtPayload | null {
+  if (!secretOrPublicKey) {
+    throw new Error("JWT_SECRET_KEY environment variable is not set.");
+  }
+
   try {
     const decoded = jwt.verify(token, secretOrPublicKey) as JwtPayload;
     return {
