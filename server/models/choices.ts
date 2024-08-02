@@ -1,9 +1,7 @@
 import { prisma } from "../utils/prisma";
+import type { choices as Choice } from "@prisma/client";
 
-type Choice = {
-  choice: string;
-  created_at: Date;
-};
+type ChoiceType = Pick<Choice, "choice" | "created_at">;
 
 export const deleteChoice = async (choiceId: number) => {
   const deletedChoice = await prisma.choices.delete({
@@ -32,7 +30,7 @@ export const getChoiceById = async (choiceId: number) => {
   return choice;
 };
 
-export const postChoice = async (choice: Choice) => {
+export const postChoice = async (choice: ChoiceType) => {
   try {
     const newChoice = await prisma.choices.create({
       data: {
@@ -54,7 +52,7 @@ export const postChoice = async (choice: Choice) => {
   }
 };
 
-export const putChoice = async (choiceId: number, choice: Choice) => {
+export const putChoice = async (choiceId: number, choice: ChoiceType) => {
   try {
     const updatedChoice = await prisma.choices.update({
       where: {

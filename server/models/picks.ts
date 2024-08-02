@@ -1,12 +1,7 @@
 import { prisma } from "../utils/prisma";
+import type { picks as Pick } from "@prisma/client";
 
-type Pick = {
-  player_id: number;
-  grand_prix_id: number;
-  choice_id: number;
-  pick_id: number;
-  created_at: Date;
-};
+type PickType = Omit<Pick, "id" | "updated_at" | "deleted_at">;
 
 export const deletePick = async (pickId: number) => {
   const deletedPick = await prisma.picks.delete({
@@ -35,7 +30,7 @@ export const getPicksByGrandPrixId = async (grandPrixId: number) => {
   return pick;
 };
 
-export const postPick = async (pick: Pick) => {
+export const postPick = async (pick: PickType) => {
   try {
     const newPick = await prisma.picks.create({
       data: {
@@ -60,7 +55,7 @@ export const postPick = async (pick: Pick) => {
   }
 };
 
-export const putPick = async (pickId: number, pick: Pick) => {
+export const putPick = async (pickId: number, pick: PickType) => {
   try {
     const updatedPick = await prisma.picks.update({
       where: {

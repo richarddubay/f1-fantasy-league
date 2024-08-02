@@ -1,10 +1,7 @@
 import { prisma } from "../utils/prisma";
+import type { player as Player } from "@prisma/client";
 
-type Player = {
-  first_name: string;
-  last_name: string;
-  created_at: Date;
-};
+type PlayerType = Pick<Player, "first_name" | "last_name" | "created_at">;
 
 export const deletePlayer = async (playerId: number) => {
   const deletedPlayer = await prisma.player.delete({
@@ -33,7 +30,7 @@ export const getPlayerById = async (playerId: number) => {
   return player;
 };
 
-export const postPlayer = async (player: Player) => {
+export const postPlayer = async (player: PlayerType) => {
   try {
     const newPlayer = await prisma.player.create({
       data: {
@@ -56,7 +53,7 @@ export const postPlayer = async (player: Player) => {
   }
 };
 
-export const putPlayer = async (playerId: number, player: Player) => {
+export const putPlayer = async (playerId: number, player: PlayerType) => {
   try {
     const updatedPlayer = await prisma.player.update({
       where: {

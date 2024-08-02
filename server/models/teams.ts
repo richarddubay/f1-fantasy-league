@@ -1,9 +1,7 @@
 import { prisma } from "../utils/prisma";
+import type { team as Team } from "@prisma/client";
 
-type Team = {
-  team_name: string;
-  created_at: Date;
-};
+type TeamType = Pick<Team, "team_name" | "created_at">;
 
 export const deleteTeam = async (teamId: number) => {
   const deletedTeam = await prisma.team.delete({
@@ -32,7 +30,7 @@ export const getTeamById = async (teamId: number) => {
   return team;
 };
 
-export const postTeam = async (team: Team) => {
+export const postTeam = async (team: TeamType) => {
   try {
     const newTeam = await prisma.team.create({
       data: {
@@ -54,7 +52,7 @@ export const postTeam = async (team: Team) => {
   }
 };
 
-export const putTeam = async (teamId: number, team: Team) => {
+export const putTeam = async (teamId: number, team: TeamType) => {
   try {
     const updatedTeam = await prisma.team.update({
       where: {
