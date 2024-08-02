@@ -31,53 +31,30 @@ export const getDriverById = async (driverId: number) => {
 };
 
 export const postDriver = async (driver: DriverType) => {
-  try {
-    const newDriver = await prisma.driver.create({
-      data: {
-        first_name: driver.first_name,
-        last_name: driver.last_name,
-        team_id: driver.team_id,
-        driver_number: driver.driver_number,
-        place_of_birth: driver.place_of_birth,
-        country: driver.country,
-        created_at: driver.created_at,
-      },
-    });
-    return {
-      message: "Success",
-      statusCode: 201,
-      driver: newDriver,
-    };
-  } catch (error) {
-    return {
-      message: "Internal Server Error",
-      statusCode: 500,
-      errorMessage: error,
-    };
-  }
+  const newDriver = await prisma.driver.create({
+    data: {
+      first_name: driver.first_name,
+      last_name: driver.last_name,
+      team_id: driver.team_id,
+      driver_number: driver.driver_number,
+      place_of_birth: driver.place_of_birth,
+      country: driver.country,
+      birth_date: driver.birth_date,
+      created_at: driver.created_at,
+    },
+  });
+  return newDriver;
 };
 
 export const putDriver = async (driverId: number, driver: DriverType) => {
-  try {
-    const updatedDriver = await prisma.driver.update({
-      where: {
-        id: driverId,
-      },
-      data: {
-        ...driver,
-      },
-    });
-
-    return {
-      message: "Success",
-      statusCode: 200,
-      driver: updatedDriver,
-    };
-  } catch (error) {
-    return {
-      message: "Internal Server Error",
-      statusCode: 500,
-      errorMessage: error,
-    };
-  }
+  const updatedDriver = await prisma.driver.update({
+    where: {
+      id: driverId,
+    },
+    data: {
+      ...driver,
+      created_at: driver.created_at ? new Date(driver.created_at) : undefined,
+    },
+  });
+  return updatedDriver;
 };

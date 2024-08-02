@@ -1,0 +1,2 @@
+ALTER TABLE driver
+ADD COLUMN birth_date VARCHAR(25) NOT NULL;
