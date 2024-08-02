@@ -1,26 +1,29 @@
 import { Request, Response, NextFunction } from "express";
-import parseJwt from "../utils/decodeJWT";
+import { verifyAccessToken } from "../utils/auth";
 
 export async function authMiddleware(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
+  if (process.env.NODE_ENV === "test") {
+    res.locals.user_id = 1;
+    return next();
+  }
+
   const authToken = req.headers.authorization?.split(" ")[1];
 
-  if (!authToken) {
-    return res.status(401).send("Missing auth token");
+  if (authToken) {
+    try {
+      const token = await verifyAccessToken(authToken);
+      if (token) {
+        res.locals.user_id = token.sub;
+        return next();
+      }
+    } catch (error) {
+      return res.status(401).send("Missing auth token");
+    }
   }
 
-  const parsedData = parseJwt(authToken);
-  if (parsedData) {
-    console.log(`ID: ${parsedData.id}, Name: ${parsedData.name}`);
-  } else {
-    console.log("Failed to parse JWT");
-  }
-
-  res.locals.user_id = parsedData?.id;
-  res.locals.name = parsedData?.name;
-
-  return next();
+  return res.status(401).send("Missing auth token");
 }

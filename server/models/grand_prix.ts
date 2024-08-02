@@ -1,7 +1,8 @@
 import { prisma } from "../utils/prisma";
 // import type { grand_prix as GrandPrix } from "@prisma/client";
 
-// type GrandPrixType = Omit<GrandPrix, "id" | "updated_at" | "deleted_at">;
+// type GrandPrixType = Omit<GrandPrix, "created_at" | "deleted_at" | "id" | "updated_at">;
+
 type GrandPrix =
   | {
       grand_prix_name: string;

@@ -22,6 +22,7 @@ const deletePlayer = async (req: Request, res: Response) => {
           id: deletedPlayer.id,
           first_name: deletedPlayer.first_name,
           last_name: deletedPlayer.last_name,
+          identifier: deletedPlayer.identifier,
           created_at: deletedPlayer.created_at,
         },
       });
@@ -64,11 +65,12 @@ const getPlayerById = async (req: Request, res: Response) => {
 
 const postPlayer = async (req: Request, res: Response) => {
   try {
-    const { first_name, last_name } = req.body;
+    const { first_name, last_name, identifier, password } = req.body;
     const newPlayer = {
       first_name,
       last_name,
-      created_at: new Date(),
+      identifier,
+      password,
     };
 
     if (!newPlayer.first_name || !newPlayer.last_name) {
@@ -93,12 +95,13 @@ const putPlayer = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const numericId = parseInt(id);
-    const { first_name, last_name, created_at } = req.body;
+    const { first_name, last_name, identifier, password } = req.body;
 
     const playerToUpdate = {
       first_name,
       last_name,
-      created_at,
+      identifier,
+      password,
     };
 
     const playerResponse = await playersModel.putPlayer(

@@ -570,8 +570,3 @@ VALUES
     'Yas Marina Circuit',
     CURRENT_TIMESTAMP
   );
-
-INSERT INTO
-  public.player (first_name, last_name, created_at)
-VALUES
-  ('Rich', 'Dubay', CURRENT_TIMESTAMP);

@@ -1,3 +1,4 @@
+export { default as authRouter } from "./auth";
 export { default as choicesRouter } from "./choices";
 export { default as driversRouter } from "./drivers";
 export { default as grandPrixRouter } from "./grand_prix";

@@ -10,7 +10,7 @@ datasource db {
 model choices {
   id         Int       @id @default(autoincrement())
   choice     String    @db.VarChar(50)
-  created_at DateTime  @db.Timestamp(6)
+  created_at DateTime? @db.Timestamp(6)
   updated_at DateTime? @db.Timestamp(6)
   deleted_at DateTime? @db.Timestamp(6)
 }
@@ -21,7 +21,7 @@ model driver {
   last_name      String    @db.VarChar(50)
   team_id        Int
   driver_number  Int
-  created_at     DateTime  @db.Timestamp(6)
+  created_at     DateTime? @db.Timestamp(6)
   updated_at     DateTime? @db.Timestamp(6)
   deleted_at     DateTime? @db.Timestamp(6)
   place_of_birth String    @db.VarChar(255)
@@ -57,7 +57,7 @@ model grand_prix {
   sprint_race_start       DateTime? @db.Timestamptz(6)
   is_sprint_weekend       Boolean?
   circuit_name            String    @db.VarChar(255)
-  created_at              DateTime  @db.Timestamp(6)
+  created_at              DateTime? @db.Timestamp(6)
   updated_at              DateTime? @db.Timestamp(6)
   deleted_at              DateTime? @db.Timestamp(6)
 }
@@ -68,7 +68,7 @@ model picks {
   grand_prix_id Int
   choice_id     Int
   pick_id       Int
-  created_at    DateTime  @db.Timestamp(6)
+  created_at    DateTime? @db.Timestamp(6)
   updated_at    DateTime? @db.Timestamp(6)
   deleted_at    DateTime? @db.Timestamp(6)
 }
@@ -77,15 +77,17 @@ model player {
   id         Int       @id @default(autoincrement())
   first_name String    @db.VarChar(50)
   last_name  String    @db.VarChar(50)
-  created_at DateTime  @db.Timestamp(6)
+  created_at DateTime? @db.Timestamp(6)
   updated_at DateTime? @db.Timestamp(6)
   deleted_at DateTime? @db.Timestamp(6)
+  identifier String    @unique @db.VarChar(255)
+  password   String    @db.VarChar(255)
 }
 
 model team {
   id         Int       @id @default(autoincrement())
   team_name  String    @db.VarChar(100)
-  created_at DateTime  @db.Timestamp(6)
+  created_at DateTime? @db.Timestamp(6)
   updated_at DateTime? @db.Timestamp(6)
   deleted_at DateTime? @db.Timestamp(6)
 }
