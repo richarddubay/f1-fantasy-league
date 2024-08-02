@@ -2,12 +2,13 @@ import express from "express";
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 import {
+  authRouter,
   choicesRouter,
-  teamsRouter,
   driversRouter,
   grandPrixRouter,
   picksRouter,
   playersRouter,
+  teamsRouter,
 } from "./routers";
 import { authMiddleware } from "./middleware/auth";
 const cors = require("cors");
@@ -37,10 +38,19 @@ const options = {
 const swaggerSpec = swaggerJsDoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+/* Auth */
+app.use("/auth", authRouter);
+
+// app.use(authMiddleware);
+app.use((req, res, next) => {
+  if (req.path.startsWith("/auth")) {
+    return next(); // Skip authMiddleware for /auth routes
+  }
+  authMiddleware(req, res, next);
+});
+
 /* Choices */
 app.use("/choice", choicesRouter);
-
-app.use(authMiddleware);
 
 /* Constructors */
 app.use("/constructor", teamsRouter);

@@ -81,7 +81,6 @@ const postDriver = async (req: Request, res: Response) => {
       place_of_birth,
       country,
       birth_date,
-      created_at: new Date(),
     };
 
     if (
@@ -126,7 +125,6 @@ const putDriver = async (req: Request, res: Response) => {
       place_of_birth,
       country,
       birth_date,
-      created_at,
     } = req.body;
 
     const driverToUpdate = {
@@ -137,7 +135,6 @@ const putDriver = async (req: Request, res: Response) => {
       place_of_birth,
       country,
       birth_date,
-      created_at,
     };
 
     const driverResponse = await driversModel.putDriver(

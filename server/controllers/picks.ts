@@ -69,7 +69,6 @@ const postPick = async (req: Request, res: Response) => {
       grand_prix_id,
       choice_id,
       pick_id,
-      created_at: new Date(),
     };
 
     if (
@@ -99,15 +98,13 @@ const putPick = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const numericId = parseInt(id);
-    const { player_id, grand_prix_id, choice_id, pick_id, created_at } =
-      req.body;
+    const { player_id, grand_prix_id, choice_id, pick_id } = req.body;
 
     const pickToUpdate = {
       player_id,
       grand_prix_id,
       choice_id,
       pick_id,
-      created_at,
     };
 
     const pickResponse = await picksModel.putPick(numericId, pickToUpdate);

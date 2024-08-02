@@ -63,7 +63,6 @@ const postChoice = async (req: Request, res: Response) => {
     const { choice } = req.body;
     const newChoice = {
       choice,
-      created_at: new Date(),
     };
 
     if (!newChoice.choice) {
@@ -88,11 +87,10 @@ const putChoice = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const numericId = parseInt(id);
-    const { choice, created_at } = req.body;
+    const { choice } = req.body;
 
     const choiceToUpdate = {
       choice,
-      created_at,
     };
 
     const choiceResponse = await choicesModel.putChoice(

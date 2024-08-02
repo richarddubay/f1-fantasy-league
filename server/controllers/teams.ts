@@ -64,7 +64,6 @@ const postTeam = async (req: Request, res: Response) => {
     const { team_name } = req.body;
     const newTeam = {
       team_name,
-      created_at: new Date(),
     };
 
     if (!newTeam.team_name) {
@@ -89,11 +88,10 @@ const putTeam = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const numericId = parseInt(id);
-    const { team_name, created_at } = req.body;
+    const { team_name } = req.body;
 
     const teamToUpdate = {
       team_name,
-      created_at,
     };
 
     const teamResponse = await teamsModel.putTeam(numericId, teamToUpdate);

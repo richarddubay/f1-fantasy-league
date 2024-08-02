@@ -1,7 +1,10 @@
 import { prisma } from "../utils/prisma";
 import type { choices as Choice } from "@prisma/client";
 
-type ChoiceType = Pick<Choice, "choice" | "created_at">;
+type ChoiceType = Omit<
+  Choice,
+  "created_at" | "deleted_at" | "id" | "updated_at"
+>;
 
 export const deleteChoice = async (choiceId: number) => {
   const deletedChoice = await prisma.choices.delete({
@@ -33,8 +36,8 @@ export const getChoiceById = async (choiceId: number) => {
 export const postChoice = async (choice: ChoiceType) => {
   const newChoice = await prisma.choices.create({
     data: {
-      choice: choice.choice,
-      created_at: choice.created_at,
+      ...choice,
+      created_at: new Date(),
     },
   });
   return newChoice;
@@ -47,7 +50,7 @@ export const putChoice = async (choiceId: number, choice: ChoiceType) => {
     },
     data: {
       ...choice,
-      created_at: choice.created_at ? new Date(choice.created_at) : undefined,
+      updated_at: new Date(),
     },
   });
   return updatedChoice;
