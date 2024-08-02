@@ -31,48 +31,23 @@ export const getTeamById = async (teamId: number) => {
 };
 
 export const postTeam = async (team: TeamType) => {
-  try {
-    const newTeam = await prisma.team.create({
-      data: {
-        team_name: team.team_name,
-        created_at: team.created_at,
-      },
-    });
-    return {
-      message: "Success",
-      statusCode: 201,
-      team: newTeam,
-    };
-  } catch (error) {
-    return {
-      message: "Internal Server Error",
-      statusCode: 500,
-      errorMessage: error,
-    };
-  }
+  const newTeam = await prisma.team.create({
+    data: {
+      team_name: team.team_name,
+      created_at: team.created_at,
+    },
+  });
+  return newTeam;
 };
 
 export const putTeam = async (teamId: number, team: TeamType) => {
-  try {
-    const updatedTeam = await prisma.team.update({
-      where: {
-        id: teamId,
-      },
-      data: {
-        ...team,
-      },
-    });
-
-    return {
-      message: "Success",
-      statusCode: 200,
-      team: updatedTeam,
-    };
-  } catch (error) {
-    return {
-      message: "Internal Server Error",
-      statusCode: 500,
-      errorMessage: error,
-    };
-  }
+  const updatedTeam = await prisma.team.update({
+    where: {
+      id: teamId,
+    },
+    data: {
+      ...team,
+    },
+  });
+  return updatedTeam;
 };

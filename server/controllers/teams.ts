@@ -3,96 +3,109 @@ import { teamsModel } from "../models";
 import { prisma } from "../utils/prisma";
 
 const deleteTeam = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const numericId = parseInt(id);
-  const team = await prisma.team.findUnique({
-    where: {
-      id: numericId,
-    },
-  });
-  if (team) {
-    const deletedTeam = await teamsModel.deleteTeam(numericId);
-    res.send(`Deleted team ${deletedTeam.id}: ${deletedTeam.team_name}`);
-    res.json({
-      message: "Deleted team",
-      pick: {
-        id: deletedTeam.id,
-        team_name: deletedTeam.team_name,
-        created_at: deletedTeam.created_at,
+  try {
+    const { id } = req.params;
+    const numericId = parseInt(id);
+    const team = await prisma.team.findUnique({
+      where: {
+        id: numericId,
       },
     });
-  } else {
-    res.send("No team with that id exists");
+    if (team) {
+      const deletedTeam = await teamsModel.deleteTeam(numericId);
+      res.send(`Deleted team ${deletedTeam.id}: ${deletedTeam.team_name}`);
+      res.json({
+        message: "Deleted team",
+        pick: {
+          id: deletedTeam.id,
+          team_name: deletedTeam.team_name,
+          created_at: deletedTeam.created_at,
+        },
+      });
+    } else {
+      res.send("No team with that id exists");
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: error,
+    });
   }
 };
 
 const getTeams = async (req: Request, res: Response) => {
-  const teams = await teamsModel.getAllTeams();
-  res.json(teams);
+  try {
+    const teams = await teamsModel.getAllTeams();
+    res.json(teams);
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
 };
 
 const getTeamById = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const numericId = parseInt(id);
-  const team = await teamsModel.getTeamById(numericId);
-  res.json(team);
+  try {
+    const { id } = req.params;
+    const numericId = parseInt(id);
+    const team = await teamsModel.getTeamById(numericId);
+    res.json(team);
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
 };
 
 const postTeam = async (req: Request, res: Response) => {
-  const { team_name } = req.body;
-  const newTeam = {
-    team_name,
-    created_at: new Date(),
-  };
+  try {
+    const { team_name } = req.body;
+    const newTeam = {
+      team_name,
+      created_at: new Date(),
+    };
 
-  if (!newTeam.team_name) {
-    return res.status(400).send("A team needs a team name");
-  }
+    if (!newTeam.team_name) {
+      return res.status(400).send("A team needs a team name");
+    }
 
-  const teamResponse = await teamsModel.postTeam(newTeam);
+    const teamResponse = await teamsModel.postTeam(newTeam);
 
-  if ("errorMessage" in teamResponse) {
-    console.error(
-      `There was an error adding the new team: ${teamResponse.errorMessage}`
-    );
-    return res
-      .status(teamResponse.statusCode)
-      .send(
-        `There was an error adding the new team: ${teamResponse.errorMessage}`
-      );
-  } else {
-    return res.status(teamResponse.statusCode).json({
+    return res.status(201).json({
       message: "Team created successfully",
-      team: teamResponse.team,
+      team: teamResponse,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: `There was an error adding the new team: ${error}`,
+      error: error,
     });
   }
 };
 
 const putTeam = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const numericId = parseInt(id);
-  const { team_name, created_at } = req.body;
+  try {
+    const { id } = req.params;
+    const numericId = parseInt(id);
+    const { team_name, created_at } = req.body;
 
-  const teamToUpdate = {
-    team_name,
-    created_at,
-  };
+    const teamToUpdate = {
+      team_name,
+      created_at,
+    };
 
-  const teamResponse = await teamsModel.putTeam(numericId, teamToUpdate);
+    const teamResponse = await teamsModel.putTeam(numericId, teamToUpdate);
 
-  if ("errorMessage" in teamResponse) {
-    console.error(
-      `There was an error updating the team: ${teamResponse.errorMessage}`
-    );
-    return res
-      .status(teamResponse.statusCode)
-      .send(
-        `There was an error updating the team: ${teamResponse.errorMessage}`
-      );
-  } else {
-    return res.status(teamResponse.statusCode).json({
+    return res.status(200).json({
       message: "Team updated successfully",
-      team: teamResponse.team,
+      team: teamResponse,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: `There was an error updating the team: ${error}`,
+      error: error,
     });
   }
 };
