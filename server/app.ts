@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
-const swaggerJsDoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
+import swaggerJsDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 import {
   authRouter,
   choicesRouter,
@@ -12,7 +12,7 @@ import {
 } from "./routers";
 import { authMiddleware } from "./middleware/auth";
 import { error } from "./middleware/error";
-const cors = require("cors");
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
@@ -42,6 +42,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 /* Auth */
 app.use("/auth", authRouter);
 
+/* Auth Middleware */
 // app.use(authMiddleware);
 app.use((req, res, next) => {
   if (req.path.startsWith("/auth")) {
@@ -68,7 +69,7 @@ app.use("/picks", picksRouter);
 /* Players */
 app.use("/player", playersRouter);
 
-// Error Handling
+/* Error Handling Middleware */
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   error(err, req, res, next);
 });
