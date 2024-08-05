@@ -26,7 +26,7 @@ const postSignIn = async (req: Request, res: Response) => {
         return res.status(200).json({ accessToken });
       }
     }
-    return res.status(404).send("Player not found.");
+    return res.status(404).send("Player identifier or password was incorrect.");
   } catch (error) {
     res.status(500).json({
       message: `There was an error signing in: ${error}`,

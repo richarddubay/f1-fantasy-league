@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 import {
@@ -11,6 +11,7 @@ import {
   teamsRouter,
 } from "./routers";
 import { authMiddleware } from "./middleware/auth";
+import { error } from "./middleware/error";
 const cors = require("cors");
 
 const app = express();
@@ -66,5 +67,10 @@ app.use("/picks", picksRouter);
 
 /* Players */
 app.use("/player", playersRouter);
+
+// Error Handling
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  error(err, req, res, next);
+});
 
 export default app;
