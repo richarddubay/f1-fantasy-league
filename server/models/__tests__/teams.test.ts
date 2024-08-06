@@ -103,4 +103,65 @@ describe("Teams Model", () => {
       expect(result).toEqual(team);
     });
   });
+
+  describe("postTeam", () => {
+    it("should create a team", async () => {
+      // Arrange
+      const team = {
+        id: 1,
+        team_name: "Team Doobie",
+        created_at: new Date(),
+        updated_at: null,
+        deleted_at: null,
+      };
+      prismaForTests.team = {
+        create: jest.fn().mockResolvedValue(team),
+      };
+
+      // Act
+      const result = await teamsModel.postTeam(team);
+
+      // Assert
+      expect(prisma.team.create).toHaveBeenCalledTimes(1);
+      expect(prisma.team.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          data: {
+            ...team,
+            created_at: new Date(),
+          },
+        })
+      );
+      expect(result).toEqual(team);
+    });
+  });
+
+  describe("putTeam", () => {
+    it("should create a team", async () => {
+      // Arrange
+      const team = {
+        team_name: "Team Doobie",
+      };
+      prismaForTests.team = {
+        update: jest.fn().mockResolvedValue(team),
+      };
+
+      // Act
+      const result = await teamsModel.putTeam(1, team);
+
+      // Assert
+      expect(prisma.team.update).toHaveBeenCalledTimes(1);
+      expect(prisma.team.update).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: {
+            id: 1,
+          },
+          data: {
+            ...team,
+            updated_at: new Date(),
+          },
+        })
+      );
+      expect(result).toEqual(team);
+    });
+  });
 });
