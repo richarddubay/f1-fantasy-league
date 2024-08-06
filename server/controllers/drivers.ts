@@ -15,7 +15,7 @@ const deleteDriver = async (req: Request, res: Response) => {
       const deletedDriver = await driversModel.deleteDriver(numericId);
       res.json({
         message: "Deleted driver",
-        pick: {
+        driver: {
           id: deletedDriver.id,
           first_name: deletedDriver.first_name,
           last_name: deletedDriver.last_name,

@@ -15,7 +15,7 @@ const deleteGrandPrix = async (req: Request, res: Response) => {
       const deletedGrandPrix = await grandPrixModel.deleteGrandPrix(numericId);
       res.json({
         message: "Deleted grand prix",
-        pick: {
+        grand_prix: {
           id: deletedGrandPrix.id,
           grand_prix_name: deletedGrandPrix.grand_prix_name,
           grand_prix_location: deletedGrandPrix.grand_prix_location,

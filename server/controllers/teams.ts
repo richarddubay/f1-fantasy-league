@@ -1,42 +1,44 @@
 import { Request, Response } from "express";
 import { teamsModel } from "../models";
-import { prisma } from "../utils/prisma";
 
 const deleteTeam = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const numericId = parseInt(id);
-    const team = await prisma.team.findUnique({
-      where: {
-        id: numericId,
-      },
-    });
+    const team = await teamsModel.getTeamById(numericId);
+
     if (team) {
       const deletedTeam = await teamsModel.deleteTeam(numericId);
-      res.send(`Deleted team ${deletedTeam.id}: ${deletedTeam.team_name}`);
-      res.json({
+      res.status(204).json({
         message: "Deleted team",
-        pick: {
+        team: {
           id: deletedTeam.id,
           team_name: deletedTeam.team_name,
           created_at: deletedTeam.created_at,
         },
       });
     } else {
-      res.send("No team with that id exists");
+      res.status(404).send("No team with that id exists");
     }
   } catch (error) {
-    res.status(500).json({
-      message: "Internal Server Error",
-      error: error,
-    });
+    if (error instanceof Error) {
+      res.status(500).json({
+        message: "Internal Server Error",
+        error: error.message,
+      });
+    } else {
+      res.status(500).json({
+        message: "Internal Server Error",
+        error: "An unknown error occurred.",
+      });
+    }
   }
 };
 
 const getTeams = async (req: Request, res: Response) => {
   try {
     const teams = await teamsModel.getAllTeams();
-    res.json(teams);
+    res.status(200).json(teams);
   } catch (error) {
     res.status(500).json({
       message: "Internal Server Error",
@@ -50,7 +52,7 @@ const getTeamById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const numericId = parseInt(id);
     const team = await teamsModel.getTeamById(numericId);
-    res.json(team);
+    res.status(200).json(team);
   } catch (error) {
     res.status(500).json({
       message: "Internal Server Error",

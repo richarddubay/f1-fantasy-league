@@ -22,7 +22,7 @@ export const getAllTeams = async () => {
 };
 
 export const getTeamById = async (teamId: number) => {
-  const team = await prisma.team.findMany({
+  const team = await prisma.team.findUnique({
     where: {
       id: teamId,
     },
