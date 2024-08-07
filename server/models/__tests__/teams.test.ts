@@ -122,6 +122,7 @@ describe("Teams Model", () => {
       const result = await teamsModel.postTeam(team);
 
       // Assert
+      console.log("new Date() = ", new Date());
       expect(prisma.team.create).toHaveBeenCalledTimes(1);
       expect(prisma.team.create).toHaveBeenCalledWith(
         expect.objectContaining({

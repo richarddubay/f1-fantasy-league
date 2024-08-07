@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="4" failures="0" errors="0" time="0.939">
-  <testsuite name="controllers/__tests__/teams.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-08-06T20:10:29" time="0.821" tests="4">
+<testsuites name="jest tests" tests="9" failures="0" errors="0" time="1.12">
+  <testsuite name="models/__tests__/teams.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-08-07T14:27:42" time="0.911" tests="5">
+    <testcase classname="Teams Model › deleteTeam" name="should delete a team" time="0.004">
+    </testcase>
+    <testcase classname="Teams Model › getAllTeams" name="should get all teams" time="0">
+    </testcase>
+    <testcase classname="Teams Model › getTeamById" name="should get a team by id" time="0.001">
+    </testcase>
+    <testcase classname="Teams Model › postTeam" name="should create a team" time="0">
+    </testcase>
+    <testcase classname="Teams Model › putTeam" name="should create a team" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="controllers/__tests__/teams.test.ts" errors="0" failures="0" skipped="0" timestamp="2024-08-07T14:27:42" time="0.943" tests="4">
     <testcase classname="Teams Controller › deleteTeam" name="should delete a team when a valid team id is provided" time="0.006">
     </testcase>
-    <testcase classname="Teams Controller › deleteTeam" name="should return a message if the team does not exist" time="0.001">
+    <testcase classname="Teams Controller › deleteTeam" name="should return a message if the team does not exist" time="0">
     </testcase>
     <testcase classname="Teams Controller › deleteTeam" name="should return a 500 error with a specific error message if something goes wrong" time="0.001">
     </testcase>
-    <testcase classname="Teams Controller › deleteTeam" name="should return a 500 error with a generic error message if something that isn&apos;t an error goes wrong" time="0">
+    <testcase classname="Teams Controller › deleteTeam" name="should return a 500 error with a generic error message if something that isn&apos;t an error goes wrong" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>
