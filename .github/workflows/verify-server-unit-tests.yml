@@ -1,0 +1,37 @@
+name: Verify Server Unit Tests
+
+on:
+  pull_request:
+    paths:
+      - "server/**"
+
+defaults:
+  run:
+    working-directory: ./server
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎 Checkout
+        uses: actions/checkout@v3
+      - name: pnpm-setup
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - name: Install
+        run: pnpm i
+      - name: Test
+        run: npm run test:unit
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Jest Tests
+          path: "**/reports/jest-junit.xml" # Path to test results
+          reporter: jest-junit

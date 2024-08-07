@@ -1,7 +1,10 @@
 import { prisma } from "../utils/prisma";
 import type { team as Team } from "@prisma/client";
 
-type TeamType = Omit<Team, "created_at" | "deleted_at" | "id" | "updated_at">;
+export type TeamType = Omit<
+  Team,
+  "created_at" | "deleted_at" | "id" | "updated_at"
+>;
 
 export const deleteTeam = async (teamId: number) => {
   const deletedTeam = await prisma.team.delete({
