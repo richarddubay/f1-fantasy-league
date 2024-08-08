@@ -122,7 +122,6 @@ describe("Teams Model", () => {
       const result = await teamsModel.postTeam(team);
 
       // Assert
-      console.log("new Date() = ", new Date());
       expect(prisma.team.create).toHaveBeenCalledTimes(1);
       expect(prisma.team.create).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -137,7 +136,7 @@ describe("Teams Model", () => {
   });
 
   describe("putTeam", () => {
-    it("should create a team", async () => {
+    it("should update a team", async () => {
       // Arrange
       const team = {
         team_name: "Team Doobie",

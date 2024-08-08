@@ -34,7 +34,7 @@ export const getAllPlayers = async () => {
 };
 
 export const getPlayerById = async (playerId: number) => {
-  const player = await prisma.player.findMany({
+  const player = await prisma.player.findUnique({
     where: {
       id: playerId,
     },
