@@ -18,7 +18,7 @@ The purpose of the F1 Fantasy League app (codename: _Drift Kings_) is to provide
 
 - A person must be able to sign in.
 - A person must be able to make picks.
-- An admin must be able to add and remove race/sprint/driver/constructor/race result info in the database.
+- An admin must be able to add and remove race/sprint/driver/team/race result info in the database.
 - A person must be able to see how they did in each Grand Prix weekend.
 - A person should be able to see a leaderboard that shows the current updated standings of everyone participating.
 
@@ -31,12 +31,12 @@ The purpose of the F1 Fantasy League app (codename: _Drift Kings_) is to provide
 ### Could Have
 
 - The app could have a pseudo-calendar showing when and where each Grand Prix (and it's associated events) will take place. This could be as simple as a list.
-- The app could have an admin section where the admin could perform the tasks necessary to maintain the app. Add/delete players, add/delete race/sprint/driver/constructor/race result info, etc.
-- The app could include driver/constructor logos/avatars.
+- The app could have an admin section where the admin could perform the tasks necessary to maintain the app. Add/delete players, add/delete race/sprint/driver/team/race result info, etc.
+- The app could include driver/team logos/avatars.
 
 ### Won't Have / Wish List
 
-- Driver/constructor/grand prix profile pages each with info about the driver, constructor, or grand prix.
+- Driver/team/grand prix profile pages each with info about the driver, team, or grand prix.
 - Fantasy league history page with results for each year. Who participated, final league standings, etc.
 
 <hr style="height: 1px" />

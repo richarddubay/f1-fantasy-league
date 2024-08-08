@@ -1,4 +1,4 @@
-version: "3"
+# version: "3"
 services:
   db:
     image: postgres:latest
@@ -18,5 +18,16 @@ services:
       - ./database:/flyway/sql
     depends_on:
       - db
+  api:
+    profiles: ["be"]
+    build:
+      context: ./server
+      dockerfile: Dockerfile.local
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server:/app
+    environment:
+      DATABASE_URL: "postgres://postgres:password@db:5432/f1_fantasy_league_db?schema=public"
 volumes:
   db:
