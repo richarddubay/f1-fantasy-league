@@ -1,0 +1,14 @@
+FROM node:18
+
+RUN apt-get update
+RUN apt-get install -y openssl
+
+WORKDIR /app
+
+RUN npm install -g nodemon
+
+ENTRYPOINT ["sh", "-c"]
+
+HEALTHCHECK CMD curl --fail http://localhost:3001 || exit 1   
+
+CMD ["npm install && npm run run-server"]

@@ -52,7 +52,13 @@ const getTeamById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const numericId = parseInt(id);
     const team = await teamsModel.getTeamById(numericId);
-    res.status(200).json(team);
+    if (team) {
+      res.status(200).json(team);
+    } else {
+      res.status(404).json({
+        message: "A team with that id could not be found",
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: "Internal Server Error",

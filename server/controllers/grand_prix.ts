@@ -59,7 +59,13 @@ const getGrandPrixById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const numericId = parseInt(id);
     const grandPrix = await grandPrixModel.getGrandPrixById(numericId);
-    res.json(grandPrix);
+    if (grandPrix) {
+      res.status(200).json(grandPrix);
+    } else {
+      res.status(404).json({
+        message: "A grand prix with that id could not be found",
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: "Internal Server Error",

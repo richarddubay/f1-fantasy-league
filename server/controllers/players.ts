@@ -51,7 +51,13 @@ const getPlayerById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const numericId = parseInt(id);
     const player = await playersModel.getPlayerById(numericId);
-    res.json(player);
+    if (player) {
+      res.status(200).json(player);
+    } else {
+      res.status(404).json({
+        message: "A player with that id could not be found",
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: "Internal Server Error",

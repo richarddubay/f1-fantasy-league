@@ -54,9 +54,6 @@ app.use((req, res, next) => {
 /* Choices */
 app.use("/choice", choicesRouter);
 
-/* Constructors */
-app.use("/constructor", teamsRouter);
-
 /* Drivers */
 app.use("/driver", driversRouter);
 
@@ -68,6 +65,9 @@ app.use("/picks", picksRouter);
 
 /* Players */
 app.use("/player", playersRouter);
+
+/* Teams */
+app.use("/team", teamsRouter);
 
 /* Error Handling Middleware */
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

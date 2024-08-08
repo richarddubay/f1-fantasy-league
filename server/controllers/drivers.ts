@@ -53,7 +53,13 @@ const getDriverById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const numericId = parseInt(id);
     const driver = await driversModel.getDriverById(numericId);
-    res.json(driver);
+    if (driver) {
+      res.status(200).json(driver);
+    } else {
+      res.status(404).json({
+        message: "A driver with that id could not be found",
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: "Internal Server Error",

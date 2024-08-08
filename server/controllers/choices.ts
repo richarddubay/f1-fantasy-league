@@ -49,7 +49,13 @@ const getChoiceById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const numericId = parseInt(id);
     const choice = await choicesModel.getChoiceById(numericId);
-    res.json(choice);
+    if (choice) {
+      res.status(200).json(choice);
+    } else {
+      res.status(404).json({
+        message: "A choice with that id could not be found",
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: "Internal Server Error",

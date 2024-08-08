@@ -8,6 +8,7 @@
     "prisma:pull": "prisma db pull",
     "run-server": "nodemon ./index.ts localhost 8080",
     "test": "jest",
+    "test:integration": "jest --config ./jest.integration.config.ts --testPathPattern ./routers/ --forceExit",
     "test:unit": "jest --testPathIgnorePatterns ./routers/ --ci --reporters=default --reporters=jest-junit",
     "test:unit:watch": "jest --watch --testPathIgnorePatterns ./routers/"
   },
@@ -29,6 +30,7 @@
     "@types/jest": "^29.5.12",
     "@types/jest-when": "^3.5.5",
     "@types/jsonwebtoken": "^9.0.6",
+    "@types/supertest": "^6.0.2",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
     "dotenv": "^16.4.5",
@@ -36,6 +38,7 @@
     "jest-junit": "^16.0.0",
     "jest-when": "^3.6.0",
     "prisma": "^5.17.0",
+    "supertest": "^7.0.0",
     "swagger-jsdoc": "^6.2.8",
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
@@ -48,6 +51,7 @@
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "testcontainers": "^10.11.0"
   }
 }
