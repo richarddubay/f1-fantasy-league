@@ -21,6 +21,7 @@ const deleteTeam = async (req: Request, res: Response) => {
       res.status(404).send("No team with that id exists");
     }
   } catch (error) {
+    console.log("team delete error = ", error);
     if (error instanceof Error) {
       res.status(500).json({
         message: "Internal Server Error",

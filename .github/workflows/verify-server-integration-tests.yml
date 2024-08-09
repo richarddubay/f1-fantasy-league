@@ -11,7 +11,7 @@ defaults:
     working-directory: ./server
 
 env:
-  DATABASE_URL: postgresql://postgres:password@localhost:5432/f1_fantasy_league_db?schema=public
+  DATABASE_URL: postgresql://postgres:password@localhost:5433/f1_fantasy_league_db?schema=public
 
 jobs:
   execute:

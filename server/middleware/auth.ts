@@ -11,6 +11,10 @@ export async function authMiddleware(
     return next();
   }
 
+  if (req.path.startsWith("/auth")) {
+    return next(); // Skip authMiddleware for /auth routes
+  }
+
   const authToken = req.headers.authorization?.split(" ")[1];
 
   if (authToken) {

@@ -43,13 +43,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/auth", authRouter);
 
 /* Auth Middleware */
-// app.use(authMiddleware);
-app.use((req, res, next) => {
-  if (req.path.startsWith("/auth")) {
-    return next(); // Skip authMiddleware for /auth routes
-  }
-  authMiddleware(req, res, next);
-});
+app.use(authMiddleware);
 
 /* Choices */
 app.use("/choice", choicesRouter);

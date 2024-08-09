@@ -13,7 +13,7 @@ const deletePlayer = async (req: Request, res: Response) => {
     });
     if (player) {
       const deletedPlayer = await playersModel.deletePlayer(numericId);
-      res.json({
+      res.status(204).json({
         message: "Deleted player",
         player: {
           id: deletedPlayer.id,
