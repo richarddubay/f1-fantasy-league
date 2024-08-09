@@ -5,7 +5,6 @@ const { DockerComposeEnvironment, Wait } = require("testcontainers");
 
 // https://node.testcontainers.org/features/compose/
 module.exports = async () => {
-  console.log("starting global setup");
   const composeFilePath = path.resolve(__dirname, "../../");
   const composeFile = "docker-compose.yml";
 
@@ -16,6 +15,5 @@ module.exports = async () => {
     .withWaitStrategy("flyway-1", Wait.forLogMessage(/^Successfully applied/))
     .up();
 
-  console.log("global setup complete");
   await new Promise((x) => setTimeout(x, 500));
 };

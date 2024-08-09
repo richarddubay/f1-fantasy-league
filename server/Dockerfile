@@ -15,4 +15,4 @@ ENV SESSION_KEY=$SESSION_KEY
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "run-server"]
