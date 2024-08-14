@@ -13,6 +13,6 @@ ARG SESSION_KEY
 ENV DATABASE_URL=$API_DB_URL
 ENV SESSION_KEY=$SESSION_KEY
 
-EXPOSE 3000
+EXPOSE 3001
 
-CMD ["npm", "run", "run-server"]
+CMD ["npm", "run", "start"]

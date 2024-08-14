@@ -1,0 +1,26 @@
+{
+  "containers": {
+    "app": {
+      "image": ":f1-fantasy-league.f1-fantasy-league-api.11",
+      "environment": {
+        "APP_ENV": "release",
+        "NODE_ENV": "production"
+      },
+      "ports": {
+        "3001": "HTTP"
+      }
+    }
+  },
+  "publicEndpoint": {
+    "containerName": "app",
+    "containerPort": 3001,
+    "healthCheck": {
+      "healthyThreshold": 2,
+      "unhealthyThreshold": 2,
+      "timeoutSeconds": 5,
+      "intervalSeconds": 10,
+      "path": "/api-docs",
+      "successCodes": "200-499"
+    }
+  }
+}
