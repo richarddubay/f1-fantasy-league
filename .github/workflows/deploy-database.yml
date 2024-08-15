@@ -3,10 +3,10 @@ name: Deploy Database
 on:
   workflow_call:
   push:
-    branches:
-      - main
-    paths:
-      - "database/**"
+    # branches:
+    #   - main
+    # paths:
+    #   - "database/**"
 
 jobs:
   migrate:
