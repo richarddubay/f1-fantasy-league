@@ -35,7 +35,7 @@ jobs:
       - name: Build and push image to Lightsail
         id: build-image
         run: |
-          docker build --build-arg API_DB_URL="${{ secrets.API_DB_URL }}" -t f1-fantasy-league:latest .
+          docker build --build-arg API_DB_URL="${{ secrets.API_DB_URL }}" --build-arg JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}" -t f1-fantasy-league:latest .
           aws lightsail push-container-image --region us-east-1 --service-name f1-fantasy-league --label f1-fantasy-league-api --image f1-fantasy-league:latest
       - name: Deploy Service
         run: |

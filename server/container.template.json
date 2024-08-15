@@ -1,7 +1,7 @@
 {
   "containers": {
     "app": {
-      "image": ":f1-fantasy-league.f1-fantasy-league-api.11",
+      "image": ":f1-fantasy-league.f1-fantasy-league-api.28",
       "environment": {
         "APP_ENV": "release",
         "NODE_ENV": "production"
