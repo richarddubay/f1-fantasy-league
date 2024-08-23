@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import reactImage from "../../../../../../images/f1-fantasy-league.svg";
+import reactImage from "../../../../images/f1-fantasy-league.svg";
 import usePostSignUp from "@/hooks/api/auth/usePostSignUp";
 
 const formSchema = z.object({

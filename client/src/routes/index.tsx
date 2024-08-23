@@ -6,7 +6,6 @@ import UnauthenticatedRoutes from "./UnauthenticatedRoutes";
 function RootRouter() {
   const { isSignedIn } = useAuth();
 
-  console.log("isSignedIn = ", isSignedIn);
   return (
     <>
       {isSignedIn ? <AuthenticatedRoutes /> : <UnauthenticatedRoutes />}

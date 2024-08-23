@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import reactImage from "../../../../../../images/f1-fantasy-league.svg";
+import reactImage from "../../../../images/f1-fantasy-league.svg";
 import usePostSignIn from "@/hooks/api/auth/usePostSignIn";
 
 const formSchema = z.object({
@@ -20,7 +20,7 @@ const formSchema = z.object({
   password: z.string().min(5),
 });
 
-export function SignInForm() {
+const SignInForm = () => {
   const mutation = usePostSignIn();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -116,6 +116,6 @@ export function SignInForm() {
       </form>
     </Form>
   );
-}
+};
 
 export default SignInForm;

@@ -1,9 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import SignInForm from "../pages/Auth/routes/SignIn";
-import SignUpForm from "../pages/Auth/routes/SignUp";
+import SignInForm from "../pages/auth/signin";
+import SignUpForm from "../pages/auth/signup";
 
 const UnauthenticatedRoutes = () => {
-  console.log("Inside UnauthenticatedRoutes");
   return (
     <Routes>
       <Route path="/" element={<SignInForm />} />
